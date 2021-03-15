@@ -72,12 +72,12 @@ public class PlayerController : MonoBehaviour {
 		curPos = transform.position;
 		//check to see if object is moving
 		if(Mathf.Abs(rb.velocity.x) < 1 && Mathf.Abs(rb.velocity.z) < 1){
-			Debug.Log("no movement");
+			//Debug.Log("no movement");
 			OSCHandler.Instance.SendMessageToClient("pd", "/unity/rolling", 0);
 		}
 		else{
 			OSCHandler.Instance.SendMessageToClient("pd", "/unity/rolling", 1);
-			Debug.Log("moving");
+			//Debug.Log("moving");
 		}
 		lastPos = curPos;
 
