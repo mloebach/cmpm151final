@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class GameSystem : MonoBehaviour
@@ -14,6 +15,7 @@ public class GameSystem : MonoBehaviour
         //gameObject.GetComponent<Renderer> ().material.color = QuestionWall.GetComponent<QuestionWall>().wallQuestion.FloorColor;
         if(currentlevel >= questions.Count){
             currentlevel = 0;
+            
         }
         QuestionWall.GetComponent<QuestionWall>().wallQuestion = questions[currentlevel];
 

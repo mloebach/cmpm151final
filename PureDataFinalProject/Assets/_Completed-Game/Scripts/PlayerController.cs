@@ -18,6 +18,10 @@ public class PlayerController : MonoBehaviour {
 	private int count;
 
 	private GameObject questionWall;
+	public GameObject gameFloor;
+	public GameSystem gameSystem;
+
+	private Vector3 curPos, lastPos;
 
 	// At the start of the game..
 	void Start ()
@@ -50,9 +54,26 @@ public class PlayerController : MonoBehaviour {
 		// multiplying it by 'speed' - our public player speed that appears in the inspector
 		rb.AddForce (movement * speed);
 
-		if(transform.position.y <  -50){
-			SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+		if(transform.position.y <  -30){
+			if(GameSystem.currentlevel >= gameSystem.questions.Count){
+            	SceneManager.LoadScene("WinScene");
+        	}else{
+				SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+			}
+			
 		}
+
+
+		curPos = transform.position;
+		//check to see if object is moving
+		if(Mathf.Abs(rb.velocity.x) < 1 && Mathf.Abs(rb.velocity.z) < 1){
+			Debug.Log("no movement");
+		}else{
+			Debug.Log("moving");
+		}
+		lastPos = curPos;
+
+		
 	}
 
 	// When this game object intersects a collider with 'is trigger' checked, 
@@ -71,11 +92,18 @@ public class PlayerController : MonoBehaviour {
 			// Run the 'SetCountText()' function (see below)
 			//SetCountText ();
 
+			GameObject[] gameObjects =  GameObject.FindGameObjectsWithTag ("Pick Up");
+			for(var i = 0 ; i < gameObjects.Length ; i ++){
+				Destroy(gameObjects[i]);
+			}
 
 			if(other.gameObject.GetComponent<Rotator>().answer.Correct){
 				questionWall.transform.Find("questionText").GetComponent<TMP_Text>().text = "Correct!";
 				StartCoroutine(questionWall.GetComponent<QuestionWall>().LowerWall());
 				GameSystem.currentlevel++;
+			}else{
+				questionWall.transform.Find("questionText").GetComponent<TMP_Text>().text = "<br>WRONG!";
+				gameFloor.SetActive(false);
 			}
 		}
 	}
