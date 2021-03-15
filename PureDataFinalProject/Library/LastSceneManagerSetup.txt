@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/_Completed-Game/Roll-a-ball.unity
+- path: C:/Users/jacks/Desktop/cmpm151midterm/SpeedBurner/Assets/Scenes/SampleScene.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
