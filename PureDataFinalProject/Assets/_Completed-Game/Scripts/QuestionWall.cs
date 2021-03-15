@@ -10,12 +10,15 @@ public class QuestionWall : MonoBehaviour
     [SerializeField] GameObject answerToken;
     [SerializeField] float arenaLength;
 
+    [SerializeField] Vector3 spawnPos;
+
     public void Start(){
         questionSetup();
         //StartCoroutine(LowerWall());
     }
 
     public void questionSetup(){
+        refreshPos();
         questionText.text = wallQuestion.WallQuestion;
         makeAnswers();
     }
@@ -26,7 +29,7 @@ public class QuestionWall : MonoBehaviour
 
             float offset = (arenaLength*2f)/ (float) (newAnswers.Length-1);
             offset = offset * i;
-            Debug.Log(offset);
+            //Debug.Log(offset);
             offset -= arenaLength;
             GameObject newAnswer = Instantiate(answerToken, new Vector3(offset, 1, transform.position.z-4), Quaternion.identity) as GameObject;
             newAnswer.GetComponent<Rotator>().answer = newAnswers[i];
@@ -39,9 +42,13 @@ public class QuestionWall : MonoBehaviour
                 (float)Random.Range(0, 255)/255f, 
                 (float)Random.Range(0, 255)/255f
             );
-            Debug.Log(objectColor);
+            //Debug.Log(objectColor);
             newAnswer.GetComponent<Renderer>().material.color = objectColor;
         }
+    }
+
+    public void refreshPos(){
+        transform.position = spawnPos;
     }
 
     public IEnumerator LowerWall(){

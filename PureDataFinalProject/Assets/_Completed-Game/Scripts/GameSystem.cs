@@ -21,6 +21,13 @@ public class GameSystem : MonoBehaviour
 
     }
 
+    public void LoadNextQuestion(){
+        if(currentlevel >= questions.Count){
+            currentlevel = 0;   
+        }
+        QuestionWall.GetComponent<QuestionWall>().wallQuestion = questions[currentlevel];
+    }
+
     // Update is called once per frame
     void Update()
     {
