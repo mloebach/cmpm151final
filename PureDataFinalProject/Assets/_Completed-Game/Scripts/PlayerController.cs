@@ -38,6 +38,11 @@ public class PlayerController : MonoBehaviour {
 		// Set the text property of our Win Text UI to an empty string, making the 'You Win' (game over message) blank
 		winText.text = "";
 		questionWall = GameObject.Find("Walls/QuestionWall");
+
+		//Initialize the pd
+		OSCHandler.Instance.Init();
+		OSCHandler.Instance.SendMessageToClient("pd", "/unity/synthon", 1);
+		OSCHandler.Instance.SendMessageToClient("pd", "/unity/synthchange", 49);
 	}
 
 	// Each physics step..
@@ -68,7 +73,10 @@ public class PlayerController : MonoBehaviour {
 		//check to see if object is moving
 		if(Mathf.Abs(rb.velocity.x) < 1 && Mathf.Abs(rb.velocity.z) < 1){
 			Debug.Log("no movement");
-		}else{
+			OSCHandler.Instance.SendMessageToClient("pd", "/unity/rolling", 0);
+		}
+		else{
+			OSCHandler.Instance.SendMessageToClient("pd", "/unity/rolling", 1);
 			Debug.Log("moving");
 		}
 		lastPos = curPos;
@@ -99,10 +107,14 @@ public class PlayerController : MonoBehaviour {
 
 			if(other.gameObject.GetComponent<Rotator>().answer.Correct){
 				questionWall.transform.Find("questionText").GetComponent<TMP_Text>().text = "Correct!";
+				OSCHandler.Instance.SendMessageToClient("pd", "/unity/right", 1);
 				StartCoroutine(questionWall.GetComponent<QuestionWall>().LowerWall());
 				GameSystem.currentlevel++;
-			}else{
+				OSCHandler.Instance.SendMessageToClient("pd", "/unity/synthchange", ((GameSystem.currentlevel) + 49));
+			}
+			else{
 				questionWall.transform.Find("questionText").GetComponent<TMP_Text>().text = "<br>WRONG!";
+				OSCHandler.Instance.SendMessageToClient("pd", "/unity/wrong", 1);
 				gameFloor.SetActive(false);
 			}
 		}
