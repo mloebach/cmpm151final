@@ -9,8 +9,6 @@ public class FloorColor : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        OSCHandler.Instance.Init();
-
         gameObject.GetComponent<Renderer> ().material.color = 
             GameObject.Find("Walls/QuestionWall").GetComponent<QuestionWall>().wallQuestion.FloorColor;
         //gameObject.GetComponent<Renderer>().material.color = new Color(0.5f,0.5f,1);
@@ -20,7 +18,7 @@ public class FloorColor : MonoBehaviour
     void Update()
     {
         //************* Routine for receiving the OSC...
-        /*
+        
         OSCHandler.Instance.UpdateLogs();
         Dictionary<string, ServerLog> servers = new Dictionary<string, ServerLog>();
         servers = OSCHandler.Instance.Servers;
@@ -37,9 +35,10 @@ public class FloorColor : MonoBehaviour
                 //countText.text = item.Value.packets[lastPacketIndex].Address.ToString();
                 //countText.text += item.Value.packets[lastPacketIndex].Data[0].ToString();
                 Debug.Log(item.Value.packets[lastPacketIndex].Data[0].ToString());
-        */
+        
             }
         }
+        
         //*************
     }
 }
