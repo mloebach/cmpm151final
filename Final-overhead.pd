@@ -1,5 +1,5 @@
-#N canvas 105 99 1492 809 12;
-#N canvas -9 -9 1920 976 synth1 1;
+#N canvas 840 132 2117 1169 12;
+#N canvas 437 262 3140 1606 synth1 1;
 #X obj 522 67 hsl 128 15 0 1 0 0 oscgain2 oscgain2 Osc_Gain2 -2 -8
 0 10 -262144 -1 -1 0 1;
 #X obj 454 1556 hsl 128 15 0 1 0 0 mastergain mastergain Master_Gain
@@ -1103,7 +1103,7 @@ Distortion:_Dry_---_Wet -2 -8 0 10 -262144 -1 -1 0 1;
 #X obj 1172 817 s osc4;
 #X floatatom 1565 458 5 0 0 0 - - -;
 #X obj 1514 456 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
-1 1;
+0 1;
 #X obj 1514 520 f;
 #X obj 1554 521 + 1;
 #X obj 1514 489 metro 500;
@@ -1142,7 +1142,7 @@ Distortion:_Dry_---_Wet -2 -8 0 10 -262144 -1 -1 0 1;
 #X msg 1770 399 0;
 #X msg 1809 399 1;
 #X floatatom 685 475 5 0 0 0 - - -;
-#X obj 661 464 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+#X obj 661 464 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
 1;
 #X obj 634 538 f;
 #X obj 674 539 + 1;
@@ -1243,6 +1243,15 @@ Distortion:_Dry_---_Wet -2 -8 0 10 -262144 -1 -1 0 1;
 #X obj 1541 576 s audioreactive;
 #X obj 1877 586 s audioreactive;
 #X text 402 1140 turns on patch;
+#X text 1853 46 This section controls the gain for each OSC;
+#X text 1437 49 Main controller for each synth;
+#X text 1428 63 press '1' to turn on music for stage 1;
+#X text 1429 79 press '2' to turn on music for stage 2;
+#X text 1428 94 press '3' to turn on music for stage 3;
+#X text 1434 110 press '4' to turn on music for stage 4;
+#X text 1442 126 press '5' to turn on music for stage 5;
+#X text 1450 140 press '6' to turn on music for stage 6;
+#X text 88 136 Preset for base key;
 #X connect 3 0 82 0;
 #X connect 6 0 52 0;
 #X connect 8 0 21 0;
